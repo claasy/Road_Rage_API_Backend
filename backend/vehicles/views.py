@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,8 +21,24 @@ def get_all_vehicles(request):
 @permission_classes([IsAuthenticated])
 def user_vehicles(request):
     if request.method == 'POST':
-        serializer = VehicleSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.date, status=status.HTTP_204_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # grab plate from request
+        plate_from_request = request.data['license_plate']
+        # find existing vehicle with that plate
+        try:
+            vehicle = Vehicle.objects.get(plate=plate_from_request)
+            # if vehicle exists, update that vehicle with all the fields from the request
+            vehicle.user = request.user
+            vehicle.type = request.data['type']
+            vehicle.color = request.data['color']
+            vehicle.model = request.data['model']
+            vehicle.make = request.data['make']
+            #finish other fields from form
+            vehicle.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        # otherwise, create new vehicle   
+        except ObjectDoesNotExist:
+            serializer = VehicleSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(user=request.user)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -13,4 +13,4 @@ class Incident(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
 
-# Create your models here.
+
