@@ -31,6 +31,7 @@ const HomePage = () => {
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
       <Link to="/addvehicle">Add Vehicle!</Link>
+      <Link to="/addincident">Add Incident!</Link>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>

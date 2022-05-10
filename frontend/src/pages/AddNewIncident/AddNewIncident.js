@@ -8,15 +8,15 @@ import useCustomForm from "../../hooks/useCustomForm"
 
 let initialValues = {
     license_plate: "",
-    incident_type: "",
+    incident_type: "Courteous Driver, Funny, Gross, Rude, Texter, Dangerous or Parking Violation",
     incident_description: "",
     approximate_date_and_time:"",
-    approximate_location:"nearest intersection",
+    approximate_location:"",
     city: "",
     state: ""
 };
 
-const IncidentPage = () => {
+const AddIncidentPage = () => {
     const [user, token] = useAuth()
     const navigate = useNavigate()
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewIncident)
@@ -38,7 +38,7 @@ const IncidentPage = () => {
         <div className="container">
           <form className="form" onSubmit={handleSubmit}>
             <label>
-              license_plate:{" "}
+              License Plate:{" "}
               <input
                 type="text"
                 name="license_plate"
@@ -47,7 +47,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              incident_type:{" "}
+              Type of Incident:{" "}
               <input
                 type="text"
                 name="incident_type"
@@ -56,7 +56,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              incident_description:{" "}
+              Describe What Happened:{" "}
               <input
                 type="text"
                 name="incident_description"
@@ -65,7 +65,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              approximate_date_and_time:{" "}
+              Approximate Date and Time:{" "}
               <input
                 type="text"
                 name="approximate_date_and_time"
@@ -74,7 +74,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              approximate_location:{" "}
+              Approximate Location (nearest intersection or nearest intersection and store name if parking violation):{" "}
               <input
                 type="text"
                 name="approximate_location"
@@ -83,7 +83,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              city:{" "}
+              City:{" "}
               <input
                 type="text"
                 name="city"
@@ -92,7 +92,7 @@ const IncidentPage = () => {
               />
             </label>
             <label>
-              state:{" "}
+              State:{" "}
               <input
                 type="text"
                 name="state"

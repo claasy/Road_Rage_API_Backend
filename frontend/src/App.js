@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AddVehiclePage from "./pages/AddVehiclePage/AddVehiclePage";
+import AddIncidentPage from "./pages/AddNewIncident/AddNewIncident";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -35,6 +36,14 @@ function App() {
           element={
           <PrivateRoute>
             <AddVehiclePage/>
+          </PrivateRoute>
+          }
+        />
+        <Route 
+          path="/addincident" 
+          element={
+          <PrivateRoute>
+            <AddIncidentPage/>
           </PrivateRoute>
           }
         />
