@@ -22,7 +22,7 @@ def get_all_vehicles(request):
 def user_vehicles(request):
     if request.method == 'POST':
         # grab plate from request
-        plate_from_request = request.data['license_plate']
+        plate_from_request = request.data['plate']
         # find existing vehicle with that plate
         try:
             vehicle = Vehicle.objects.get(plate=plate_from_request)
