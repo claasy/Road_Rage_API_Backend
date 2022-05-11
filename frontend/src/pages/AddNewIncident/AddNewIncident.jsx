@@ -29,6 +29,10 @@ const AddIncidentPage = () => {
                 }
             })
             navigate("/")
+            // navigate to a different page that queryies/filters to display all incidents with this car
+            // capture plate data that is being submitted, hold it in a state variable in app (similar to searchTerm)
+            // use that state variable to filter incident data
+            // pass incident data into new page via props like vehicles are being passed into homepage
         } catch (error) {
             console.log(error.message)
         }
