@@ -37,6 +37,23 @@ def user_incidents(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_incidents(request,license_plate):
+   
+    # grab license plate info off of request form
+    # query db to find vehicle with that plate
+    # if no vehicle found, create it
+    try:
+        incident_vehicle = Incident.objects.filter(license_plate=license_plate)
+        serializer = IncidentSerializer(incident_vehicle, many=True)
+    except ObjectDoesNotExist:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
 
 
 

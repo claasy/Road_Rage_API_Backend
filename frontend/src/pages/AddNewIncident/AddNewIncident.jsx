@@ -22,13 +22,14 @@ const AddIncidentPage = () => {
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewIncident)
 
     async function postNewIncident(){
+      console.log(formData)
         try{
             let response = await axios.post("http://127.0.0.1:8000/api/incidents/", formData, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             })
-            navigate("/")
+            navigate(`/DriverIncidents/${formData.license_plate}/`)
             // navigate to a different page that queryies/filters to display all incidents with this car
             // capture plate data that is being submitted, hold it in a state variable in app (similar to searchTerm)
             // use that state variable to filter incident data
@@ -71,7 +72,7 @@ const AddIncidentPage = () => {
             <label>
               Approximate Date and Time:{" "}
               <input
-                type="text"
+                type="datetime-local"
                 name="approximate_date_and_time"
                 value={formData.approximate_date_and_time}
                 onChange={handleInputChange}
@@ -104,7 +105,7 @@ const AddIncidentPage = () => {
                 onChange={handleInputChange}
               />
             </label>
-            <button>Add Incident!</button>
+            <button>Add Incident</button>
           </form>
         </div>
     );

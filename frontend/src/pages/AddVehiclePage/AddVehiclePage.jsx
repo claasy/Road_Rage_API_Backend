@@ -71,7 +71,7 @@ const AddVehiclePage = () => {
               />
             </label>
             
-            <button>Add Vehicle!</button>
+            <button>Add Vehicle</button>
           </form>
         </div>
     );

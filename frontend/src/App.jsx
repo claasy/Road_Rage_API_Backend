@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useEffect } from "react";
 import axios from "axios";
+import DisplayDriverIncidentsPage from "./pages/DisplayDriverIncidents/DisplayDriverIncidents";
 
 let BASEURLS = 'http://127.0.0.1:8000/api/vehicles/';
 
@@ -70,6 +71,14 @@ function App() {
           element={
           <PrivateRoute>
             <AddIncidentPage/>
+          </PrivateRoute>
+          }
+        />
+         <Route 
+          path="/DriverIncidents/:plate/" 
+          element={
+          <PrivateRoute>
+            <DisplayDriverIncidentsPage/>
           </PrivateRoute>
           }
         />
