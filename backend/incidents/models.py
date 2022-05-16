@@ -6,6 +6,7 @@ class Incident(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=8)
+    vehicle_description = models.CharField(max_length=100)
     incident_type = models.CharField(max_length=20)
     incident_description = models.CharField(max_length=1000)
     approximate_date_and_time = models.DateTimeField()

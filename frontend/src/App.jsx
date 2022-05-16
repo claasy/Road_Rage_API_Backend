@@ -36,8 +36,8 @@ function App() {
   }
 
     const filterPlates = (searchTerm) => {
-      let matchingPlates = plateData.filter((vehicle) =>
-        vehicle.plate.toUpperCase().includes(searchTerm.toUpperCase())
+      let matchingPlates = plateData.filter((plate) =>
+        plate.vehicle.toUpperCase().includes(searchTerm.toUpperCase())
        )
       setPlateData(matchingPlates)
     };
@@ -78,7 +78,7 @@ function App() {
           path="/DriverIncidents/:plate/" 
           element={
           <PrivateRoute>
-            <DisplayDriverIncidentsPage/>
+            < DisplayDriverIncidentsPage />
           </PrivateRoute>
           }
         />

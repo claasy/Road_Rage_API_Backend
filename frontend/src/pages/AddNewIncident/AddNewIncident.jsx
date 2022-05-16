@@ -8,7 +8,8 @@ import useCustomForm from "../../hooks/useCustomForm"
 
 let initialValues = {
     license_plate: "",
-    incident_type: "Courteous Driver, Funny, Gross, Rude, Texter, Dangerous or Parking Violation",
+    vehicle_description: "",
+    incident_type: "",
     incident_description: "",
     approximate_date_and_time:"",
     approximate_location:"",
@@ -52,7 +53,16 @@ const AddIncidentPage = () => {
               />
             </label>
             <label>
-              Type of Incident:{" "}
+              Vehicle Description (Color, Make and/or Model):{" "}
+              <input
+                type="text"
+                name="vehicle_description"
+                value={formData.vehicle_description}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Type of Incident (Courteous, Dangerous, Funny, Texter, Parking Violation, Gross or Rude):{" "}
               <input
                 type="text"
                 name="incident_type"

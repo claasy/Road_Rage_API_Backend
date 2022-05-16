@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
+
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -30,7 +30,7 @@ const HomePage = (props) => {
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      {/* <Link to="/addvehicle">Add Vehicle!</Link> */}
+      <Link to="/addvehicle">Add My Vehicle!</Link>
       <Link to="/addincident">Add Incident!</Link>
       {/* {cars &&
         cars.map((car) => (
@@ -38,12 +38,13 @@ const HomePage = (props) => {
             {car.year} {car.make} {car.model}
           </p>
         ))} */}
-              {props.vehicles &&
+              {/* {props.vehicles &&
         props.vehicles.map((car) => (
           <p key={car.id}>
             {car.year} {car.make} {car.model}
           </p>
-        ))}
+
+        ))} */}
     </div>
   );
 };
