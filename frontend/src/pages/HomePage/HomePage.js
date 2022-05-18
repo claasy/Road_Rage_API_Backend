@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
-
-
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
@@ -32,6 +30,7 @@ const HomePage = (props) => {
       <h1>Home Page for {user.username}!</h1>
       <Link to="/addvehicle">Add My Vehicle!</Link>
       <Link to="/addincident">Add Incident!</Link>
+      <Link to="/DriverIncidents/:plate/">Search Driver Incidents</Link>
       {/* {cars &&
         cars.map((car) => (
           <p key={car.id}>
