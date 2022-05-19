@@ -22,10 +22,7 @@ def get_all_incidents(request):
 @permission_classes([IsAuthenticated])
 def user_incidents(request):
     if request.method == 'POST':
-        # grab license plate info off of request form
-        # query db to find vehicle with that plate
-        # if no vehicle found, create it
-        plate_from_request = request.data['license_plate']
+        plate_from_request = request.data['plate']
         try:
             incident_vehicle = Vehicle.objects.get(plate=plate_from_request)
         except ObjectDoesNotExist:
@@ -41,16 +38,13 @@ def user_incidents(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_user_incidents(request,license_plate):
-   
-    # grab license plate info off of request form
-    # query db to find vehicle with that plate
-    # if no vehicle found, create it
-    try:
-        incident_vehicle = Incident.objects.filter(license_plate=license_plate)
-        serializer = IncidentSerializer(incident_vehicle, many=True)
-    except ObjectDoesNotExist:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+def get_user_incidents(request,plate):
+    if request.method == 'GET':
+        try:
+            incident_vehicle = Incident.objects.filter(plate=plate)
+            serializer = IncidentSerializer(incident_vehicle, many=True)
+        except ObjectDoesNotExist:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    
     return Response(serializer.data, status=status.HTTP_201_CREATED)
     

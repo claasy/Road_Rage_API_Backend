@@ -2,9 +2,12 @@ import{ useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import useAuth from "../../hooks/useAuth"
 import React, { useState, useEffect } from 'react';
-
-
 import useCustomForm from "../../hooks/useCustomForm"
+
+let initialValues = {
+    license_plate: "",
+    incident_description: ""
+}
 
 const DisplayDriverIncidentsPage = () => {
     // const navigate = useNavigate()
@@ -21,11 +24,12 @@ const DisplayDriverIncidentsPage = () => {
         }
         )
         console.log(response.data)
+        setIncidents(response.data);
         
     }
     useEffect(()=>{
         getDriverIncidents()
-        setIncidents(response.data);
+        
     },[])
 
     return (

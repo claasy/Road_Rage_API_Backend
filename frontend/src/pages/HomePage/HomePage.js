@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
@@ -8,43 +8,36 @@ const HomePage = (props) => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  // const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState();
 
   useEffect(() => {
-    // const fetchCars = async () => {
-    //   try {
-    //     let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     setCars(response.data);
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // };
-    // fetchCars();
-  }, [token]);
+  },[]);
   return (
-    <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      <Link to="/addvehicle">Add My Vehicle!</Link>
-      <Link to="/addincident">Add Incident!</Link>
+    <React.Fragment>
+      <div className="container">
+        <h1>Home Page for {user.username}!</h1>
+        <Link to="/addvehicle">Add My Vehicle!</Link>
+      </div>
+      <div className="container">
+        <Link to="/addincident">Add Incident!</Link>
+      </div>
+      <div className="container">
       <Link to="/DriverIncidents/:plate/">Search Driver Incidents</Link>
-      {/* {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.make} {car.model}
-          </p>
-        ))} */}
-              {/* {props.vehicles &&
-        props.vehicles.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.make} {car.model}
-          </p>
+       {/* {cars &&
+          cars.map((car) => (
+            <p key={car.id}>
+              {car.year} {car.make} {car.model}
+            </p>
+          ))} */}
+                {/* {props.vehicles &&
+          props.vehicles.map((car) => (
+            <p key={car.id}>
+              {car.year} {car.make} {car.model}
+            </p>
 
-        ))} */}
-    </div>
+          ))} */}
+      </div>
+    </React.Fragment>
   );
 };
 

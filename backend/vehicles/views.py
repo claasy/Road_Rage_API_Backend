@@ -28,6 +28,7 @@ def user_vehicles(request):
             vehicle = Vehicle.objects.get(plate=plate_from_request)
             # if vehicle exists, update that vehicle with all the fields from the request
             vehicle.user = request.user
+            vehicle.state_plate = request.data['state']
             vehicle.type = request.data['type']
             vehicle.color = request.data['color']
             vehicle.model = request.data['model']
