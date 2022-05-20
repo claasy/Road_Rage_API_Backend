@@ -7,7 +7,7 @@ import useCustomForm from "../../hooks/useCustomForm"
 
 
 let initialValues = {
-    license_plate: "",
+    plate: "",
     vehicle_description: "",
     incident_type: "",
     incident_description: "",
@@ -47,8 +47,17 @@ const AddIncidentPage = () => {
               License Plate:{" "}
               <input
                 type="text"
-                name="license_plate"
-                value={formData.license_plate}
+                name="plate"
+                value={formData.plate}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              State of License Plate:{" "}
+              <input
+                type="text"
+                name="plate_state"
+                value={formData.plate_state}
                 onChange={handleInputChange}
               />
             </label>

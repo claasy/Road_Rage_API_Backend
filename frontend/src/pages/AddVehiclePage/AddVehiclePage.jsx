@@ -8,6 +8,7 @@ import useCustomForm from "../../hooks/useCustomForm"
 
 let initialValues = {
     plate: "",
+    plate_state: "",
     make: "",
     model: "",
     color:"",
@@ -40,6 +41,15 @@ const AddVehiclePage = () => {
                 type="text"
                 name="plate"
                 value={formData.plate}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              State of Plate:{" "}
+              <input
+                type="text"
+                name="plate_state"
+                value={formData.plate_state}
                 onChange={handleInputChange}
               />
             </label>

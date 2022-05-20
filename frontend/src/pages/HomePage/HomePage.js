@@ -22,7 +22,7 @@ const HomePage = (props) => {
         <Link to="/addincident">Add Incident!</Link>
       </div>
       <div className="container">
-      <Link to="/DriverIncidents/:plate/">Search Driver Incidents</Link>
+      <Link to="/DriverIncidents/:plate/">Search By Plate</Link>
        {/* {cars &&
           cars.map((car) => (
             <p key={car.id}>
