@@ -13,7 +13,6 @@ import DisplayDriverIncidentsPage from "./pages/DisplayDriverIncidents/DisplayDr
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import SearchBar from "./components/SearchBar/SearchBar";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";

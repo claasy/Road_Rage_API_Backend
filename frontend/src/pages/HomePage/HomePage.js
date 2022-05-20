@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import DidYouKnowSection from "../../components/DidYouKnowSection/DidYouKnowSection";
+
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState();
+  const [vehicles, setVehicles] = useState();
 
   useEffect(() => {
   },[]);
@@ -16,13 +18,22 @@ const HomePage = (props) => {
     <React.Fragment>
       <div className="container">
         <h1>Home Page for {user.username}!</h1>
+        <div className="container">
+        <h2>? DID YOU KNOW ?</h2>
+        <DidYouKnowSection />
+        <h2> Now you do!</h2>
+      </div>
+        <p> SAFETY FIRST - Before reporting ANY incident, please think of the safety of yourself and those around you. Your entry can wait until you are home or safely parked and out of traffic.</p>
+        <p>
+        ***If the incident you are reporting is in violation of any laws, or if it is dangerous, (someone could be injured), always report it to the proper authorities first! This is not a replacement for our law enforcement, simply an outlet for responsible drivers to vent***
+      </p>
         <Link to="/addvehicle">Add My Vehicle!</Link>
       </div>
       <div className="container">
         <Link to="/addincident">Add Incident!</Link>
       </div>
       <div className="container">
-      <Link to="/DriverIncidents/:plate/">Search By Plate</Link>
+        <SearchBar />
        {/* {cars &&
           cars.map((car) => (
             <p key={car.id}>
