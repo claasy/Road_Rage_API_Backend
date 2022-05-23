@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const SearchBar = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    function handleSubmit(e){
-        e.preventDefault()
+    function handleSubmit(event){
+        event.preventDefault();
         props.filterPlates(searchTerm)
     }
 
@@ -12,7 +12,7 @@ const SearchBar = (props) => {
         <>
         <div>
             <form onSubmit={handleSubmit}>
-            <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type='text' placeholder='Search by plate...'></input>
+            <input value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} type='text' placeholder='Search by plate...'></input>
             <button type='submit'>Search</button>
             </form>
         </div>

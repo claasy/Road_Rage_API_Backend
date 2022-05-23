@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import DidYouKnowSection from "../../components/DidYouKnowSection/DidYouKnowSection";
+import DisplayDriverIncidents from "../DisplayDriverIncidents/DisplayDriverIncidents";
 
 
 const HomePage = (props) => {
@@ -21,7 +22,7 @@ const HomePage = (props) => {
         <div className="container">
         <h2>? DID YOU KNOW ?</h2>
         <DidYouKnowSection />
-        <h2> Now you do!</h2>
+        <h3> Now you do!</h3>
       </div>
         <p> SAFETY FIRST - Before reporting ANY incident, please think of the safety of yourself and those around you. Your entry can wait until you are home or safely parked and out of traffic.</p>
         <p>
@@ -33,7 +34,10 @@ const HomePage = (props) => {
         <Link to="/addincident">Add Incident!</Link>
       </div>
       <div className="container">
-        <SearchBar />
+        <SearchBar filterPlates={props.filterPlates} />
+      </div>
+      <div className="container">
+        <DisplayDriverIncidents filteredData={props.filteredData} />
        {/* {cars &&
           cars.map((car) => (
             <p key={car.id}>

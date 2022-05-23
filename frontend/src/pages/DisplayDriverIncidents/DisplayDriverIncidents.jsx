@@ -5,11 +5,11 @@ import React, { useState, useEffect } from 'react';
 import useCustomForm from "../../hooks/useCustomForm"
 
 let initialValues = {
-    license_plate: "",
+    plate: "",
     incident_description: ""
 }
 
-const DisplayDriverIncidentsPage = () => {
+const DisplayDriverIncidents = (props) => {
     // const navigate = useNavigate()
     const [user, token] = useAuth()
     const {plate} = useParams();
@@ -25,24 +25,38 @@ const DisplayDriverIncidentsPage = () => {
         )
         console.log(response.data)
         setIncidents(response.data);
-        
+ 
     }
     useEffect(()=>{
         getDriverIncidents()
+        console.log(incidents)
         
     },[])
 
     return (
-        <div>
-            {incidents &&
-            incidents.map((incident) => (
-                <p key={incident.id}>
-                {incident.license_plate} {incident.incident_description} {incident.approximate_location} 
-                </p>
-            ))}
-            {/* navigate('/DisplayDriverIncidents/${formData.license_plate}/') */}
-        </div>
+        <>
+            <div>
+                {props.filtereddata.map(incident=> {
+                    
+                    return (
+                        <p>
+                        {incident.plate} {incident.incident_description} {incident.approximate_location}
+                        </p>
+                    )
+                    
+                })}
+            </div>
+            {/* <div>
+                {incidents &&
+                incidents.map((incident) => (
+                    <p key={incident.id}>
+                    {incident.plate} {incident.incident_description} {incident.approximate_location} 
+                    </p>
+                ))} */}
+                {/* navigate('/DisplayDriverIncidents/${formData.license_plate}/') */}
+            {/* </div> */}
+        </>
     )
 
 }
-export default DisplayDriverIncidentsPage
+export default DisplayDriverIncidents

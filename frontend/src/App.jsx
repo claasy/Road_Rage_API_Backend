@@ -20,13 +20,16 @@ import axios from "axios";
 let BASEURLS = 'http://127.0.0.1:8000/api/vehicles/';
 
 function App() {
-  const [plateData, setPlateData] = useState([])
+  const [plateData, setPlateData] = useState([]);
   // const [searchedPlates, setSearchPlates] = useState([])
   const [user, token] = useAuth();
+  const [filteredData, setFilteredData] = useState([])
   
   useEffect(() => {
     getPlateData();
   }, [])
+
+
 
   async function getPlateData() {
     let response = await axios.get(BASEURLS + 'all/', {
@@ -38,12 +41,12 @@ function App() {
     console.log(response.data)
   }
 
-    const filterPlates = (searchTerm) => {
-      let matchingPlates = plateData.filter((plate) =>
-        plate.vehicle.toUpperCase().includes(searchTerm.toUpperCase())
-       )
-      setPlateData(matchingPlates)
-    };
+  const filterPlates = (searchTerm) => {
+    let matchingPlates = plateData.filter((plate) =>
+      plate.plate.toUpperCase().includes(searchTerm.toUpperCase())
+     )
+     setFilteredData(matchingPlates)
+  };  
 
   return (
     <div>
@@ -53,7 +56,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage vehicles={plateData}/>
+              <HomePage filteredData={filteredData} filterPlates={filterPlates} />
             </PrivateRoute>
           }
         />
@@ -84,7 +87,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

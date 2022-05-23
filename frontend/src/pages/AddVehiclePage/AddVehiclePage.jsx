@@ -85,8 +85,5 @@ const AddVehiclePage = () => {
           </form>
         </div>
     );
-
-
 }
-
 export default AddVehiclePage
