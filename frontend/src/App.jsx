@@ -17,7 +17,7 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
 
-let BASEURLS = 'http://127.0.0.1:8000/api/vehicles/';
+let BASEURLS = 'http://127.0.0.1:8000/api/';
 
 function App() {
   const [plateData, setPlateData] = useState([]);
@@ -30,7 +30,7 @@ function App() {
   }, [])
 
   async function getPlateData() {
-    let response = await axios.get(BASEURLS + 'all/', {
+    let response = await axios.get(BASEURLS + 'vehicles/all/', {
       headers: {
         Authorization: "Bearer " + token,
       }

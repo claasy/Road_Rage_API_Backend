@@ -1,15 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
 
-export const data = [
-    ["Make", "Incidents", { role: "style" }],
-    ["Toyota", 8.94, "silver"],
-    ["Silver", 10.49, "silver"],
-    ["Gold", 19.3, "silver"],
-    ["Platinum", 21.45, "silver"],
-];
-
 const DisplayVehicleStats = ({incidents}) => {
+    
+
+    function generateDataFormChart(){
+        
+        console.log(incidents);
+
+        let filteredIncidents = incidents.filter(incident => true);
+
+        console.log('Filtered Incidents', filteredIncidents)
+
+        let makes = filteredIncidents.map(incident => {
+            return incident.make;
+        });
+
+        console.log('Makes' , makes)
+
+        const data = [
+            ["Make", "Number of Incidents", { role: "style" }],
+            ["Toyota", 4, "silver"],
+            ["Hyundai", 10, "silver"],
+            ["Harley Davidson", 19, "silver"],
+            ["Ford", 21, "silver"],
+        ];
+        return data;
+    }
+    const data = generateDataFormChart()
+    console.log (data)
     return (
         <div>
             <h1>Incidents by Vehicle Make</h1>

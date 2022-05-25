@@ -10,12 +10,11 @@ let initialValues = {
     incident_description: ""
 }
 
-const DisplayDriverIncidents = (props) => {
+const DisplayDriverIncidents = ({plate}) => {
     // const navigate = useNavigate()
     const [user, token] = useAuth()
-    const {plate} = useParams();
+    // const {plate} = useParams();
     const [incidents, setIncidents] = useState([]);
-    const [plateData, setPlateData] = useState([]);
 
     const getDriverIncidents = async() => {
         console.log(plate)
@@ -25,29 +24,22 @@ const DisplayDriverIncidents = (props) => {
             }
         }
         )
+        console.log("incidents")
         console.log(response.data)
         setIncidents(response.data);
     };
 
-    const filterPlates = (plate) => {
-        let result = plateData.filter((el) =>{
-            if(el.plate == plate){
-                return true
-            }
-        })
-        setPlateData(result)
-    };
-
+    
     useEffect(()=>{
+        console.log("useEffect")
+        console.log(plate)
         getDriverIncidents()
-        console.log(incidents)
         
-    },[])
+    },[plate])
 
     return (
         <div>
-            <SearchBar filterPlatesProp = {filterPlates}> </SearchBar>
-            {plateData.map((el) => (
+            {incidents.map((el) => (
                 <div>
                     <div>{el.plate}</div>
                     <div>{el.incident_description}</div>

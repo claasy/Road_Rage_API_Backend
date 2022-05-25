@@ -5,9 +5,10 @@ const SearchBar = (props) => {
 
     function handleSubmit(event){
         event.preventDefault();
-        props.filterPlates(searchTerm)
-    }
+        props.onSearch(searchTerm)
 
+    }
+    console.log(props)
     useEffect(()=>{
 
     },[])
