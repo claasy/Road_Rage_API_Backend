@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import DidYouKnowSection from "../../components/DidYouKnowSection/DidYouKnowSection";
 import DisplayDriverIncidents from "../DisplayDriverIncidents/DisplayDriverIncidents";
+import VehicleTable from "../../components/VehicleTable/VehicleTable";
+import axios from "axios";
+import DisplayVehicleStats from "../../components/DisplayVehicleStats/DisplayVehicleStats";
+
+let BASEURLS = 'http://127.0.0.1:8000/api/vehicles/';
 
 
 const HomePage = (props) => {
@@ -11,10 +16,41 @@ const HomePage = (props) => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [vehicles, setVehicles] = useState();
+  const [plateData, setPlateData] = useState();
+  const [filteredPlates, setFilteredPlates] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [incidents, setIncidents] = useState([]);
+  
+  useEffect(() => {
+    getVehicleData();
+  },[]);
+
+  async function getVehicleData() {
+    let result = await axios.get(BASEURLS + 'make/', {
+      headers: {
+        Authorization: "Bearer " + token,
+      }
+    });
+    
+    setVehicleData(result.data)
+  }
+
 
   useEffect(() => {
+    getPlateData();
   },[]);
+
+  async function getPlateData() {
+    let response = await axios.get(BASEURLS + 'plate/', {
+      headers: {
+        Authorization: "Bearer " + token,
+      }
+    });
+
+    setPlateData(response.data)
+  }
+
+
   return (
     <React.Fragment>
       <div className="container">
@@ -33,11 +69,16 @@ const HomePage = (props) => {
       <div className="container">
         <Link to="/addincident">Add Incident!</Link>
       </div>
-      <div className="container">
-        <SearchBar filterPlates={props.filterPlates} />
+      <div>
+        <DisplayVehicleStats incidents={incidents}/>
       </div>
-      <div className="container">
-        <DisplayDriverIncidents filteredData={props.filteredData} />
+      {/* <div className="container">
+        <SearchBar filterPlates={props.filterPlates} /> */}
+        {/* <VehicleTable filteredPlates={filteredPlates} setModal = {setModalShow} show={modalShow}
+          onHide={() => setModalShow(false)}/> */}
+      {/* </div> */}
+      {/* <div className="container">
+        <DisplayDriverIncidents filteredData={props.filteredData} /> */}
        {/* {cars &&
           cars.map((car) => (
             <p key={car.id}>
@@ -51,7 +92,7 @@ const HomePage = (props) => {
             </p>
 
           ))} */}
-      </div>
+      {/* </div> */}
     </React.Fragment>
   );
 };

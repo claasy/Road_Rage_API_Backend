@@ -8,7 +8,9 @@ import useCustomForm from "../../hooks/useCustomForm"
 
 let initialValues = {
     plate: "",
-    vehicle_description: "",
+    vehicle_make: "",
+    vehicle_model: "",
+    vehicle_color: "",
     incident_type: "",
     incident_description: "",
     approximate_date_and_time:"",
@@ -17,7 +19,7 @@ let initialValues = {
     state: ""
 };
 
-const AddIncidentPage = () => {
+const AddNewIncident = () => {
     const [user, token] = useAuth()
     const navigate = useNavigate()
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewIncident)
@@ -30,7 +32,7 @@ const AddIncidentPage = () => {
                     Authorization: 'Bearer ' + token
                 }
             })
-            navigate(`/DriverIncidents/${formData.license_plate}/`)
+            navigate(`/DriverIncidents/${formData.plate}/`)
             // navigate to a different page that queryies/filters to display all incidents with this car
             // capture plate data that is being submitted, hold it in a state variable in app (similar to searchTerm)
             // use that state variable to filter incident data
@@ -62,13 +64,31 @@ const AddIncidentPage = () => {
               />
             </label>
             <label>
-              Vehicle Description (Color, Make and/or Model):{" "}
+              Vehicle Make:{" "}
               <input
                 type="text"
-                name="vehicle_description"
-                value={formData.vehicle_description}
+                name="vehicle_make"
+                value={formData.vehicle_make}
                 onChange={handleInputChange}
               />
+            </label>
+            <label>
+              Vehicle Model:{" "}
+              <input
+                type="text"
+                name="vehicle_model"
+                value={formData.vehicle_model}
+                onChange={handleInputChange}
+              />
+            <label>
+              Vehicle Color:{" "}
+              <input
+                type="text"
+                name="vehicle_color"
+                value={formData.vehicle_color}
+                onChange={handleInputChange}
+              />
+            </label>
             </label>
             <label>
               Type of Incident (Courteous, Dangerous, Funny, Texter, Parking Violation, Gross or Rude):{" "}
@@ -130,4 +150,4 @@ const AddIncidentPage = () => {
     );
 }
 
-export default AddIncidentPage
+export default AddNewIncident

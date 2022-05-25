@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AddVehiclePage from "./pages/AddVehiclePage/AddVehiclePage";
-import AddIncidentPage from "./pages/AddNewIncident/AddNewIncident";
+import AddNewIncident from "./pages/AddNewIncident/AddNewIncident";
 import DisplayDriverIncidentsPage from "./pages/DisplayDriverIncidents/DisplayDriverIncidents";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -29,8 +29,6 @@ function App() {
     getPlateData();
   }, [])
 
-
-
   async function getPlateData() {
     let response = await axios.get(BASEURLS + 'all/', {
       headers: {
@@ -41,12 +39,12 @@ function App() {
     console.log(response.data)
   }
 
-  const filterPlates = (searchTerm) => {
-    let matchingPlates = plateData.filter((plate) =>
-      plate.plate.toUpperCase().includes(searchTerm.toUpperCase())
-     )
-     setFilteredData(matchingPlates)
-  };  
+  // const filterPlates = (searchTerm) => {
+  //   let matchingPlates = plateData.filter((plate) =>
+  //     plate.plate.toUpperCase().includes(searchTerm.toUpperCase())
+  //    )
+  //    setFilteredData(matchingPlates)
+  // };  
 
   return (
     <div>
@@ -56,7 +54,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage filteredData={filteredData} filterPlates={filterPlates} />
+              <HomePage filteredData={filteredData} />
             </PrivateRoute>
           }
         />
@@ -66,7 +64,7 @@ function App() {
           path="/addvehicle" 
           element={
           <PrivateRoute>
-            <AddVehiclePage/>
+            < AddVehiclePage />
           </PrivateRoute>
           }
         />
@@ -74,7 +72,7 @@ function App() {
           path="/addincident" 
           element={
           <PrivateRoute>
-            <AddIncidentPage/>
+            < AddNewIncident />
           </PrivateRoute>
           }
         />
