@@ -1,38 +1,49 @@
 import { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const DisplayVehicleStats = ({incidents}) => {
+
+    const [user, token] = useAuth()
+    const [chartData, setChartData] = useState();
     
-
-    function generateDataFormChart(){
-        
-        console.log(incidents);
-
-        let filteredIncidents = incidents.filter(incident => true);
-
-        console.log('Filtered Incidents', filteredIncidents)
-
-        let makes = filteredIncidents.map(incident => {
-            return incident.make;
-        });
-
-        console.log('Makes' , makes)
-
+    useEffect(async()=>{
+        let response = await axios.get(`http://127.0.0.1:8000/api/incidents/all/`,  {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        }
+        )
+        if (! response.data.length){return}
+        // console.log(response.data)
+        const makeCounters={}
         const data = [
             ["Make", "Number of Incidents", { role: "style" }],
-            ["Toyota", 4, "silver"],
-            ["Hyundai", 10, "silver"],
-            ["Harley Davidson", 19, "silver"],
-            ["Ford", 21, "silver"],
-        ];
-        return data;
-    }
-    const data = generateDataFormChart()
-    console.log (data)
+            ]
+        response.data.forEach((el) => {
+            console.log(el)
+            const make = el.vehicle_make
+            if (make in makeCounters){
+
+                makeCounters[make]++
+            } else {
+                makeCounters[make]=1
+            }
+        }
+        )
+        for(let make in makeCounters){
+            data.push([make, makeCounters[make], "silver"])
+        }
+        setChartData(data);
+    },[]);
+       
+
     return (
         <div>
             <h1>Incidents by Vehicle Make</h1>
-            <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
+            {chartData && 
+            <Chart chartType="ColumnChart" width="100%" height="400px" data={chartData} />}
         </div>
     );
 }

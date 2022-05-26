@@ -28,7 +28,6 @@ const HomePage = (props) => {
         <div className="container">
         <h2>? DID YOU KNOW ?</h2>
         <DidYouKnowSection />
-        <h3> Now you do!</h3>
       </div>
         <p> SAFETY FIRST - Before reporting ANY incident, please think of the safety of yourself and those around you. Your entry can wait until you are home or safely parked and out of traffic.</p>
         <p>
@@ -40,7 +39,7 @@ const HomePage = (props) => {
         <Link to="/addincident">Add Incident!</Link>
       </div>
       <div>
-        <DisplayVehicleStats incidents={incidents}/>
+        <DisplayVehicleStats></DisplayVehicleStats>
       </div>
       <SearchBar onSearch={setPlate}></SearchBar>
 
@@ -48,30 +47,7 @@ const HomePage = (props) => {
       {plate && <div>
         <DisplayDriverIncidents plate={plate}/>
       </div>}
-      
 
-      
-      {/* <div className="container">
-        <SearchBar filterPlates={props.filterPlates} /> */}
-        {/* <VehicleTable filteredPlates={filteredPlates} setModal = {setModalShow} show={modalShow}
-          onHide={() => setModalShow(false)}/> */}
-      {/* </div> */}
-      {/* <div className="container">
-        <DisplayDriverIncidents filteredData={props.filteredData} /> */}
-       {/* {cars &&
-          cars.map((car) => (
-            <p key={car.id}>
-              {car.year} {car.make} {car.model}
-            </p>
-          ))} */}
-                {/* {props.vehicles &&
-          props.vehicles.map((car) => (
-            <p key={car.id}>
-              {car.year} {car.make} {car.model}
-            </p>
-
-          ))} */}
-      {/* </div> */}
     </React.Fragment>
   );
 };

@@ -46,26 +46,7 @@ const DisplayDriverIncidents = ({plate}) => {
                 </div>
             ))}
         </div>
-            // <div>
-            //     {props.filtereddata.map(incident=> {
-                    
-            //         return (
-            //             <p>
-            //             {incident.plate} {incident.incident_description} {incident.approximate_location}
-            //             </p>
-            //         )
-                    
-            //     })}
-            // </div>
-            // {/* <div>
-            //     {incidents &&
-            //     incidents.map((incident) => (
-            //         <p key={incident.id}>
-            //         {incident.plate} {incident.incident_description} {incident.approximate_location} 
-            //         </p>
-            //     ))} */}
-            //     {/* navigate('/DisplayDriverIncidents/${formData.license_plate}/') */}
-            // {/* </div> */}
+            
     );
 
 };
