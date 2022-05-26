@@ -19,7 +19,26 @@ const HomePage = (props) => {
   const [incidents, setIncidents] = useState([]);
   const [plate, setPlate] = useState('');
   
-  console.log(plate)
+  console.log(user)
+
+  useEffect(()=>{
+    getDriverIncidents()
+    
+},[])
+
+  async function getDriverIncidents () {
+    let response = await axios.get(`${BASEURLS}incidents/${user.first_name}/`,  {
+        headers: {
+            Authorization: "Bearer " + token,
+        }
+    });
+    console.log("incidents", response.data)
+    setIncidents(response.data);
+};
+
+async function callMe() {
+  alert("Hello")
+}
  
   return (
     <React.Fragment>
@@ -38,6 +57,17 @@ const HomePage = (props) => {
       <div className="container">
         <Link to="/addincident">Add Incident!</Link>
       </div>
+      <div className="container">
+        <div>
+              {incidents.map((el) => (
+                  <div>
+                      <h3>Plate: <b>{el.plate}</b></h3>
+                      <p>Incident Description: <b>{el.incident_description}</b></p>
+                      <hr></hr>
+                  </div>
+              ))}
+        </div>
+      </div>
       <div>
         <DisplayVehicleStats></DisplayVehicleStats>
       </div>
@@ -45,7 +75,7 @@ const HomePage = (props) => {
 
 
       {plate && <div>
-        <DisplayDriverIncidents plate={plate}/>
+        <DisplayDriverIncidents plateSent={plate}/>
       </div>}
 
     </React.Fragment>

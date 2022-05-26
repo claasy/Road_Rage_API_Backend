@@ -153,7 +153,16 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=20),
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'aclaas522@gmail.com'
+EMAIL_HOST_PASSWORD = 'qhnufxfbtuqvotco'
+
 try:
     from drf_jwt_backend.local_settings import *
 except ImportError:
     pass
+
+
