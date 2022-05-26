@@ -25,6 +25,12 @@ def user_incidents(request):
         plate_from_request = request.data['plate']
         try:
             incident_vehicle = Vehicle.objects.get(plate=plate_from_request)
+            from_email = "aclaas522@gmail.com"
+            user = incident_vehicle.user
+            if user:
+                subject = "Incident Reported from Road Rage"
+                content = "An incident has been reported against your vehicle. Please go to Roadrage.com to learn more."
+                send_mail(subject, content, from_email, [user.email])
         except ObjectDoesNotExist:
             incident_vehicle = Vehicle(plate=plate_from_request)
             incident_vehicle.save()
@@ -34,7 +40,11 @@ def user_incidents(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+
+
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -54,6 +64,10 @@ def get_user_incidents(request,plate):
 def send_email(request):
     user = request.user
     from_email = request.data['from']
+    try:
+        incident_vehicle = Vehicle.objects.get(plate=plate_from_request)
+    except ObjectDoesNotExist:
+        incident_vehicle = Vehicle(plate=plate_from_request)
 
     print("from", from_email)
     print("to", user)
@@ -65,15 +79,6 @@ def send_email(request):
 
     return Response({'message': 'sent'}, status=status.HTTP_200_OK)
 
-    # in order to send email, there should be from/to/subject/content
-    # from: aclaas522@gmail.com
-    # to: jack@gmail.com
-    # subject: Incident Reported from Road Rage
-    # Content: An incident has been reported against your vehicle. Please go to Roadrage.com to learn more.
-    # in order to send email, you need to configure smtp. did you have smtp account?
-    # we have sepnt 40mins, $80 is fine? do you have paypal?
-    # my paypal is smartcode121@outlook.com, please don't close zoom until payment
-    # do you have discord or whatsapp?
 
 
 
